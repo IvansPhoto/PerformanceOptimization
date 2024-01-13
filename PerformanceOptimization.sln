@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerformanceOptimization.Mapper.TwoArrays", "PerformanceOptimization.Mapper.TwoArrays\PerformanceOptimization.Mapper.TwoArrays.csproj", "{A7DB25E1-F580-4C66-9AB2-AE8DD6972008}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerformanceOptimization.Mapper.TwoArrays.Tests", "PerformanceOptimization.Mapper.TwoArrays.Tests\PerformanceOptimization.Mapper.TwoArrays.Tests.csproj", "{47A04F64-01AF-4CD0-8198-ED5788A984FF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A7DB25E1-F580-4C66-9AB2-AE8DD6972008}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7DB25E1-F580-4C66-9AB2-AE8DD6972008}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7DB25E1-F580-4C66-9AB2-AE8DD6972008}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7DB25E1-F580-4C66-9AB2-AE8DD6972008}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47A04F64-01AF-4CD0-8198-ED5788A984FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47A04F64-01AF-4CD0-8198-ED5788A984FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47A04F64-01AF-4CD0-8198-ED5788A984FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47A04F64-01AF-4CD0-8198-ED5788A984FF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
