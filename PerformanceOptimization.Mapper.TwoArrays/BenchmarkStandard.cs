@@ -4,28 +4,24 @@ namespace PerformanceOptimization.Mapper.TwoArrays;
 
 [MemoryDiagnoser]
 [KeepBenchmarkFiles]
-[AsciiDocExporter]
-[CsvExporter]
-[CsvMeasurementsExporter]
-[MarkdownExporterAttribute.Default]
+[MarkdownExporterAttribute.GitHub]
 public class BenchmarkStandard
 {
     private readonly Generator _generator = new();
-
-    public IEnumerable<object> DataSource()
+    private Input _input = null!;
+    
+    [Params(10000)] 
+    public int _n;
+    
+    [GlobalSetup]
+    public void GlobalSetup()
     {
-        yield return _generator.GetInput(10000).input;
-        yield return _generator.GetInput(10000).input;
-        yield return _generator.GetInput(10000).input;
-        yield return _generator.GetInput(10000).input;
-        yield return _generator.GetInput(10000).input;
+        _input = _generator.GetInput(_n).input;
     }
     
     [Benchmark]
-    [ArgumentsSource(nameof(DataSource))]
-    public Output[] MapOriginal(Input data) => Original.Map(data);
+    public Output[] MapOriginal() => Original.Map(_input);
 
     [Benchmark(Baseline = true)]
-    [ArgumentsSource(nameof(DataSource))]
-    public Output[] MapOptimized1(Input data) => Optimized.Map(data);
+    public Output[] MapOptimized() => Optimized.Map(_input);
 }

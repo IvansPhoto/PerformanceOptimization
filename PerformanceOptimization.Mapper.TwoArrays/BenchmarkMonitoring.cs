@@ -1,18 +1,12 @@
 using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Engines;
-using BenchmarkDotNet.Exporters.Csv;
 
 namespace PerformanceOptimization.Mapper.TwoArrays;
 
-[SimpleJob(RunStrategy.Monitoring, launchCount: 3, warmupCount: 3, iterationCount: 15, invocationCount: 3)]
+[SimpleJob(RunStrategy.Monitoring, launchCount: 5, warmupCount: 3, iterationCount: 35, invocationCount: 3)]
 [MemoryDiagnoser]
-
 [KeepBenchmarkFiles]
-[AsciiDocExporter]
-[CsvExporter]
-[CsvMeasurementsExporter]
-[MarkdownExporterAttribute.Default]
+[MarkdownExporterAttribute.GitHub]
 public class BenchmarkMonitoring
 {
     private Input _input = null!;

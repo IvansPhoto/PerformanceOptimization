@@ -1,14 +1,16 @@
-﻿A real case from a project.
+﻿# About
+This project is a real case from my work about the consequences of negligent writing a simple mapper. Because the code from the project cannot be shared, I created a very similar mapper for weather observations.
+## Rules
+The purpose of the mapper is to merge data from two arrays of the Input record: Temperature[] Temperatures and string[] Places into a third array of the Output record.
+The resulting array should be the same size as the Temperatures array and should contain values and dates from the Temperatures array. Data for states and seasons fields should be received from the Places array. Each date in the Temperatures array is unique.
+The Places array can be less than, equal to, or greater than the Temperatures array.
+The Places array contains strings that can have one, two or three segments, with the ‘;’ delimiter. The first segment is a date in the format: month/day/year and the constant time stamp 00:00:00, the date is unique per array; this segment is always present. The second segment is two letters of a state and optional. The third segment is an abbreviation of a state and it and the delimiter are also optional. State and season abbreviations should be transformed into the full names of states and seasons, mappers should be case-insensitive.
+Arrays should be matched by the date. If the Places array does not have a record with the corresponding date, or a record does not have the second and/or the third segment the states and/or seasons fields should be null.
+## Results
+The benchmark results are placed in the result folder.
+This is a table from the basic benchmark.
 
-| Method        | data                | Mean          | Error       | StdDev      | Ratio    | RatioSD | Gen0         | Gen1      | Gen2    | Allocated      | Alloc Ratio |
-|-------------- |-------------------- |--------------:|------------:|------------:|---------:|--------:|-------------:|----------:|--------:|---------------:|------------:|
-| MapOriginal   | Inpu(...)[] } [105] | 14,102.893 ms | 275.8374 ms | 283.2647 ms | 6,412.77 |  128.57 | 1558000.0000 | 3000.0000 |       - | 12732234.09 KB |   14,109.45 |
-| MapOriginal   | Inpu(...)[] } [105] | 13,124.831 ms | 260.4719 ms | 278.7020 ms | 5,989.16 |  148.24 | 1559000.0000 | 3000.0000 |       - |  12736991.8 KB |   14,114.72 |
-| MapOriginal   | Inpu(...)[] } [105] | 13,548.967 ms | 263.0702 ms | 258.3701 ms | 6,158.08 |  113.27 | 1563000.0000 | 3000.0000 |       - |  12768256.1 KB |   14,149.37 |
-| MapOriginal   | Inpu(...)[] } [105] | 13,490.681 ms | 135.4145 ms | 120.0414 ms | 6,148.70 |   62.36 | 1558000.0000 | 3000.0000 |       - | 12730528.14 KB |   14,107.56 |
-| MapOriginal   | Inpu(...)[] } [105] | 13,232.483 ms | 244.7786 ms | 216.9898 ms | 6,009.69 |   84.45 | 1559000.0000 | 1000.0000 |       - | 12734817.71 KB |   14,112.31 |
-| MapOptimized1 | Inpu(...)[] } [105] |      2.196 ms |   0.0074 ms |   0.0062 ms |     1.00 |    0.00 |     140.6250 |  105.4688 | 70.3125 |      902.39 KB |        1.00 |
-| MapOptimized1 | Inpu(...)[] } [105] |      2.207 ms |   0.0096 ms |   0.0080 ms |     1.01 |    0.01 |     140.6250 |  105.4688 | 70.3125 |       902.4 KB |        1.00 |
-| MapOptimized1 | Inpu(...)[] } [105] |      2.220 ms |   0.0117 ms |   0.0098 ms |     1.01 |    0.01 |     140.6250 |  105.4688 | 70.3125 |      902.39 KB |        1.00 |
-| MapOptimized1 | Inpu(...)[] } [105] |      2.170 ms |   0.0058 ms |   0.0049 ms |     0.99 |    0.00 |     140.6250 |  105.4688 | 70.3125 |       902.4 KB |        1.00 |
-| MapOptimized1 | Inpu(...)[] } [105] |      2.166 ms |   0.0105 ms |   0.0093 ms |     0.99 |    0.00 |     140.6250 |  105.4688 | 70.3125 |      902.39 KB |        1.00 |
+| Method       | _n    | Mean          | Error       | StdDev      | Ratio    | RatioSD | Gen0         | Gen1      | Gen2    | Allocated      | Alloc Ratio |
+|------------- |------ |--------------:|------------:|------------:|---------:|--------:|-------------:|----------:|--------:|---------------:|------------:|
+| MapOriginal  | 10000 | 14,519.252 ms | 286.1450 ms | 267.6602 ms | 9,039.77 |  238.40 | 1560000.0000 | 4000.0000 |       - | 12746505.34 KB |   14,121.60 |
+| MapOptimized | 10000 |      1.607 ms |   0.0262 ms |   0.0232 ms |     1.00 |    0.00 |     140.6250 |   91.7969 | 70.3125 |      902.63 KB |        1.00 |
