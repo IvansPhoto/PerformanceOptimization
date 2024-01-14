@@ -6,8 +6,8 @@ public static class Optimized
 {
     private static readonly DateTimeFormatInfo DateTimeFormatInfo = new()
     {
-        ShortDatePattern = "MM/dd/yyyy HH:mm:ss",
-        LongDatePattern = "MM/dd/yyyy HH:mm:ss",
+        ShortDatePattern = "MM/dd/yyyy",
+        LongDatePattern = "MM/dd/yyyy"
     };
     
     public static Output[] Map(Input data)
@@ -16,7 +16,7 @@ public static class Optimized
 
         return data.Temperatures.Select(t =>
         {
-            places.TryGetValue(t.Date, out var result);
+            places.TryGetValue(DateOnly.FromDateTime(t.Date), out var result);
             return new Output
             {
                 Date = t.Date,
@@ -27,9 +27,9 @@ public static class Optimized
         }).ToArray();
     }
 
-    private static DateTime GetDate(string s)
+    private static DateOnly GetDate(string s)
     {
-        return DateTime.Parse(s.AsSpan()[..19], DateTimeFormatInfo);
+        return DateOnly.Parse(s.AsSpan()[..10], DateTimeFormatInfo);
     }
 
     private static (string? Season, string? State) GetSeasonState(string s)
