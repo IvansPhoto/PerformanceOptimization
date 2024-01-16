@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Text.Json;
 
 namespace PerformanceOptimization.Mapper.TwoArrays;
 
@@ -10,8 +11,9 @@ public static class Original
         LongDatePattern = "MM/dd/yyyy HH:mm:ss",
     };
     
-    public static Output[] Map(Input data)
+    public static Output[] Map(string json)
     {
+        var data = JsonSerializer.Deserialize<Input>(json)!;
         return data.Temperatures.Select(t => t.MapSingle(data.Places)).ToArray();
     }
 

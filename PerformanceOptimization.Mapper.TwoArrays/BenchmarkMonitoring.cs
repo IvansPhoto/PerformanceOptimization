@@ -9,11 +9,11 @@ namespace PerformanceOptimization.Mapper.TwoArrays;
 [MarkdownExporterAttribute.GitHub]
 public class BenchmarkMonitoring
 {
-    private Input _input = null!;
+    private string _input = null!;
     private readonly Generator _generator = new();
 
     [IterationSetup]
-    public void IterationSetup() => _input = _generator.GetInput(10000).input;
+    public void IterationSetup() => _input = _generator.GetInputString(10000).Input;
     
     [Benchmark]
     public Output[] MapOriginal() => Original.Map(_input);

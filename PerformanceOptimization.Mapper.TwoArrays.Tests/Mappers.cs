@@ -2,14 +2,14 @@ namespace PerformanceOptimization.Mapper.TwoArrays.Tests;
 
 public class Tests
 {
-    private Input _input = null!;
+    private string _input = null!;
     private Output[] _output = null!;
     private readonly Generator _generator = new();
 
     [SetUp]
     public void Setup()
     {
-        (_input, _output) = _generator.GetInput(100);
+        (_input, _output) = _generator.GetInputString(100);
     }
 
     [Test]

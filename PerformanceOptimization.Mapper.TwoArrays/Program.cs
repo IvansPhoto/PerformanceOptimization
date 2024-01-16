@@ -2,4 +2,4 @@
 using PerformanceOptimization.Mapper.TwoArrays;
 
 _ = BenchmarkRunner.Run<BenchmarkStandard>();
-_ = BenchmarkRunner.Run<BenchmarkMonitoring>();
+// _ = BenchmarkRunner.Run<BenchmarkMonitoring>();

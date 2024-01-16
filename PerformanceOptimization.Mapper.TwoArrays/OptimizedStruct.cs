@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace PerformanceOptimization.Mapper.TwoArrays;
 
-public static class Optimized
+public static class OptimizedStruct
 {
     private static readonly DateTimeFormatInfo DateTimeFormatInfo = new()
     {
@@ -11,15 +11,15 @@ public static class Optimized
         LongDatePattern = "MM/dd/yyyy"
     };
     
-    public static Output[] Map(string json)
+    public static OutputSt[] Map(string json)
     {
-        var data = JsonSerializer.Deserialize<Input>(json)!;
+        var data = JsonSerializer.Deserialize<InputSt>(json);
         var places = data.Places.ToDictionary(GetDate, GetSeasonState);
 
         return data.Temperatures.Select(t =>
         {
             places.TryGetValue(DateOnly.FromDateTime(t.Date), out var result);
-            return new Output
+            return new OutputSt
             {
                 Date = t.Date,
                 Value = double.Round(t.Value, 3),
@@ -72,3 +72,15 @@ public static class Optimized
         }
     }
 }
+
+public record struct OutputSt
+{
+    public DateTime Date { get; init; }
+    public double Value { get; init; }
+    public string? State { get; init; }
+    public string? Season { get; init; }
+}
+
+public record struct InputSt(TemperatureSt[] Temperatures, string[] Places);
+
+public record struct TemperatureSt(DateTime Date, double Value);

@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Text.Json;
 using Bogus;
 
 namespace PerformanceOptimization.Mapper.TwoArrays;
@@ -55,6 +56,14 @@ public class Generator
         return (new Input(temperatures, places), outputs);
     }
 
+    public (string Input, Output[] output) GetInputString(int length)
+    {
+        var (input, output) = GetInput(length);
+
+        var str = JsonSerializer.Serialize(new Input(input.Temperatures, input.Places));
+        return (str, output);
+    }
+    
     string MapSeason(string src) => src switch
     {
         "Winter" => "Wi",

@@ -8,7 +8,7 @@ namespace PerformanceOptimization.Mapper.TwoArrays;
 public class BenchmarkStandard
 {
     private readonly Generator _generator = new();
-    private Input _input = null!;
+    private string _input = null!;
     
     [Params(10000)] 
     public int _n;
@@ -16,7 +16,7 @@ public class BenchmarkStandard
     [GlobalSetup]
     public void GlobalSetup()
     {
-        _input = _generator.GetInput(_n).input;
+        _input = _generator.GetInputString(_n).Input;
     }
     
     [Benchmark]
@@ -24,4 +24,7 @@ public class BenchmarkStandard
 
     [Benchmark(Baseline = true)]
     public Output[] MapOptimized() => Optimized.Map(_input);
+    
+    [Benchmark]
+    public OutputSt[] MapOptimizedStruct() => OptimizedStruct.Map(_input);
 }
