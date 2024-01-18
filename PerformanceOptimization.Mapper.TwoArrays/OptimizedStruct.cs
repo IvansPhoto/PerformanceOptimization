@@ -29,6 +29,28 @@ public static class OptimizedStruct
         }).ToArray();
     }
 
+    public static OutputSt[] MapFor(string json)
+    {
+        var data = JsonSerializer.Deserialize<InputSt>(json)!;
+        var places = data.Places.ToDictionary(GetDate, GetSeasonState);
+
+        var outputs = new OutputSt[data.Temperatures.Length];
+        for (var i = 0; i < data.Temperatures.Length; i++)
+        {
+            var t = data.Temperatures[i];
+            places.TryGetValue(DateOnly.FromDateTime(t.Date), out var result);
+            outputs[i] = new OutputSt
+            {
+                Date = t.Date,
+                Value = double.Round(t.Value, 3),
+                Season = result.Season,
+                State = result.State
+            };
+        }
+
+        return outputs;
+    }
+    
     private static DateOnly GetDate(string s)
     {
         return DateOnly.Parse(s.AsSpan()[..10], DateTimeFormatInfo);

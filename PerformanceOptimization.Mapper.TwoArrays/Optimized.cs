@@ -10,7 +10,7 @@ public static class Optimized
         ShortDatePattern = "MM/dd/yyyy",
         LongDatePattern = "MM/dd/yyyy"
     };
-    
+
     public static Output[] Map(string json)
     {
         var data = JsonSerializer.Deserialize<Input>(json)!;
@@ -29,6 +29,28 @@ public static class Optimized
         }).ToArray();
     }
 
+    public static Output[] MapFor(string json)
+    {
+        var data = JsonSerializer.Deserialize<Input>(json)!;
+        var places = data.Places.ToDictionary(GetDate, GetSeasonState);
+
+        var outputs = new Output[data.Temperatures.Length];
+        for (var i = 0; i < data.Temperatures.Length; i++)
+        {
+            var t = data.Temperatures[i];
+            places.TryGetValue(DateOnly.FromDateTime(t.Date), out var result);
+            outputs[i] = new Output
+            {
+                Date = t.Date,
+                Value = double.Round(t.Value, 3),
+                Season = result.Season,
+                State = result.State
+            };
+        }
+
+        return outputs;
+    }
+
     private static DateOnly GetDate(string s)
     {
         return DateOnly.Parse(s.AsSpan()[..10], DateTimeFormatInfo);
@@ -37,7 +59,7 @@ public static class Optimized
     private static (string? Season, string? State) GetSeasonState(string s)
     {
         return (GetSeason(s), GetState(s));
-        
+
         string? GetState(string str)
         {
             if (str.Length < 21)

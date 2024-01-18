@@ -19,12 +19,18 @@ public class BenchmarkStandard
         _input = _generator.GetInputString(_n).Input;
     }
     
-    [Benchmark]
-    public Output[] MapOriginal() => Original.Map(_input);
+    // [Benchmark]
+    // public Output[] MapOriginal() => Original.Map(_input);
 
     [Benchmark(Baseline = true)]
     public Output[] MapOptimized() => Optimized.Map(_input);
     
     [Benchmark]
     public OutputSt[] MapOptimizedStruct() => OptimizedStruct.Map(_input);
+
+    [Benchmark]
+    public Output[] MapOptimizedFor() => Optimized.MapFor(_input);
+    
+    [Benchmark]
+    public OutputSt[] MapOptimizedStructFor() => OptimizedStruct.MapFor(_input);
 }
