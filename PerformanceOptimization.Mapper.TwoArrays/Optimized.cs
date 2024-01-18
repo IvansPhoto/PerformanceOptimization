@@ -29,23 +29,22 @@ public static class Optimized
         }).ToArray();
     }
 
-    public static Output[] MapFor(string json)
+    public static List<Output> MapFor(string json)
     {
         var data = JsonSerializer.Deserialize<Input>(json)!;
         var places = data.Places.ToDictionary(GetDate, GetSeasonState);
 
-        var outputs = new Output[data.Temperatures.Length];
-        for (var i = 0; i < data.Temperatures.Length; i++)
+        var outputs = new List<Output>(data.Temperatures.Length);
+        foreach (var t in data.Temperatures)
         {
-            var t = data.Temperatures[i];
             places.TryGetValue(DateOnly.FromDateTime(t.Date), out var result);
-            outputs[i] = new Output
+            outputs.Add(new Output
             {
                 Date = t.Date,
                 Value = double.Round(t.Value, 3),
                 Season = result.Season,
                 State = result.State
-            };
+            });
         }
 
         return outputs;

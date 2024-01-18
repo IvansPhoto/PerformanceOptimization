@@ -24,13 +24,13 @@ public class BenchmarkStandard
 
     [Benchmark(Baseline = true)]
     public Output[] MapOptimized() => Optimized.Map(_input);
-    
+   
+    [Benchmark]
+    public List<Output> MapOptimizedFor() => Optimized.MapFor(_input);
+
     [Benchmark]
     public OutputSt[] MapOptimizedStruct() => OptimizedStruct.Map(_input);
 
     [Benchmark]
-    public Output[] MapOptimizedFor() => Optimized.MapFor(_input);
-    
-    [Benchmark]
-    public OutputSt[] MapOptimizedStructFor() => OptimizedStruct.MapFor(_input);
+    public List<OutputSt> MapOptimizedStructFor() => OptimizedStruct.MapFor(_input);
 }
