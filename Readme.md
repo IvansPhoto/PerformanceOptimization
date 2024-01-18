@@ -10,8 +10,10 @@ Arrays should be matched by the date. If the Places array does not have a record
 The benchmark results are placed in the result folder.
 This is a table from the basic benchmark.
 
-| Method             | _n    | Mean          | Error       | StdDev      | Ratio    | RatioSD | Gen0         | Gen1       | Gen2     | Allocated   | Alloc Ratio |
-|------------------- |------ |--------------:|------------:|------------:|---------:|--------:|-------------:|-----------:|---------:|------------:|------------:|  
-| MapOriginal        | 10000 | 14,264.496 ms | 274.9161 ms | 257.1567 ms | 1,426.23 |   42.47 | 1560000.0000 | 25000.0000 |        - | 12445.81 MB |    2,854.80 |  
-| MapOptimized       | 10000 |      9.980 ms |   0.1954 ms |   0.2172 ms |     1.00 |    0.00 |     640.6250 |   562.5000 | 265.6250 |     4.36 MB |        1.00 |  
-| MapOptimizedStruct | 10000 |      6.092 ms |   0.1205 ms |   0.1979 ms |     0.62 |    0.02 |     625.0000 |   585.9375 | 460.9375 |     3.39 MB |        0.78 |  
+| Method                | _n    | Mean     | Error     | StdDev    | Ratio | RatioSD | Gen0     | Gen1     | Gen2     | Allocated | Alloc Ratio |
+|---------------------- |------ |---------:|----------:|----------:|------:|--------:|---------:|---------:|---------:|----------:|------------:|
+| MapOptimized          | 10000 | 9.615 ms | 0.1876 ms | 0.2160 ms |  1.00 |    0.00 | 625.0000 | 546.8750 | 250.0000 |   4.36 MB |        1.00 |
+| MapOptimizedStruct    | 10000 | 5.246 ms | 0.0591 ms | 0.0553 ms |  0.54 |    0.01 | 546.8750 | 515.6250 | 382.8125 |   3.39 MB |        0.78 |
+| MapOptimizedFor       | 10000 | 9.728 ms | 0.1922 ms | 0.2288 ms |  1.01 |    0.04 | 640.6250 | 562.5000 | 265.6250 |   4.36 MB |        1.00 |
+| MapOptimizedStructFor | 10000 | 5.317 ms | 0.1051 ms | 0.1124 ms |  0.55 |    0.01 | 546.8750 | 484.3750 | 382.8125 |   3.39 MB |        0.78 |
+
